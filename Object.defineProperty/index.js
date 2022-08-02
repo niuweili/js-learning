@@ -175,9 +175,9 @@ function deepDefineProperty(obj, key, val) {
         }
     })
 }
-// TODO:为什么要备份一份prototype
 const originProto = Array.prototype
-const arrayProto = Object.create(originProto); // 先copy一份array的原型
+// 创建新对象，原型指向 originProto，再扩展新的方法不会影响原型
+const arrayProto = Object.create(originProto);
 const methodList = [
     'push',
     'pop',
