@@ -152,8 +152,16 @@
 
 // 8.Reflect.apply(func, thisArg, args)
 // Reflect.apply()等同于Function.prototype.apply.call(func, thisArg, args)，用于绑定this对象后执行给定函数
-// TODO:补充call apply相关
 
+const ages = [11, 33, 12, 54, 18, 96];
+
+// Funciont.prototype.applay.call(fn, thisArg, args) 其实就是使用call将需要调用apply的函数的this绑定在了fn上，等同于 fn.apply(thisArg, args)
+// 所以下面这两行代码调用结果相同
+console.log(Function.prototype.apply.call(Math.min, Math, ages))
+console.log(Math.min.apply(Math, ages))
+
+// 所以使用Reflect.apply调用就是：
+console.log(Reflect.apply(Math.min, Math, ages))
 
 // 9.Reflect.defineProperty(target, propertyKey, attributes)
 // Reflect.defineProperty方法基本等同于Object.defineProperty，用来为对象定义属性。未来，后者会被逐渐废除，请从现在开始就使用Reflect.defineProperty代替它
