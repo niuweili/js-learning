@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>emoji表情符号与Unicode码点转换</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="./twemoji.js"></script>
+  </head>
+  <body>
+    <div id="emoji-text">I 💛 emoji!</div>
+  </body>
+</html>
+<script>
+  var div = document.getElementById("emoji-text");
+  // twemoji.parse(div);
+  twemoji.parse("I 💛 emoji!");
+</script>
