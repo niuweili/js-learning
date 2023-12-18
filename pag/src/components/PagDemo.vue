@@ -10,9 +10,9 @@
   
 <script setup>
 import { onMounted } from 'vue'
-import { PAGInit } from 'libpag';
+// import { PAGInit } from 'libpag';
 async function initPag() {
-    const PAG = await PAGInit()
+    const PAG = await window.libpag.PAGInit()
     const url = 'http://res-static.inframe.mobi/ui/168930774880733.pag';
     const blob = await fetch(url).then((response) => response.blob())
     const file = new window.File([blob], url.replace(/(.*\/)*([^.]+)/i, '$2'));
