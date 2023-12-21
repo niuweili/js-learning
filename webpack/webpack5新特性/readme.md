@@ -24,11 +24,39 @@ webpack5 会在 build 时判断环境，如果是浏览器环境，会借助`nod
 
 ### 长期缓存：确定的模块 id、chunk 和导出名称
 
-...
+chunkIds: "deterministic"
+moduleIds: "deterministic"
+
+webpack4中打包时的chunkId是递增的，如果文件发生变化，那打包后的文件名就会变化，缓存会失效
+
+设置`chunkIds: "deterministice"`打包后的id会是不变的短数字id，3位数字
 
 ### 持久化缓存
 
-...
+webpack4缓存策略：
+
+可以使用`cache-loader`将编译结果写入硬盘缓存，还可以使用`babel-loader`，设置`option.cacheDirectory`将`babel-loader`编译的结果写进磁盘
+
+webpack5缓存策略：
+
+- 默认开启缓存，缓存默认是在内存里，可以对cache进行设置
+- 缓存淘汰策略：文件缓存存储在/node_modules/.cache/webpack，最大500MB，缓存时长两个星期，旧的缓存会被先淘汰
+
+```
+module.exports = {
+    cache: {
+        // 1.将缓存类型设置为文件系统
+        type: 'filesystem',
+        buildDependencies: {
+            // 2. 将你的config添加为buildDependecy，以便在改变config时获得缓存失效
+            config: [__filename],
+            // 3. 如果你有其它的东西被构建依赖，你可以在这里添加它们
+            // 注意：webpack、加载器和所有从你配置中引用的模块都会被自动添加
+        }
+    }
+}
+
+```
 
 ### 构建优化：嵌套的 tree-shaking 优化
 
